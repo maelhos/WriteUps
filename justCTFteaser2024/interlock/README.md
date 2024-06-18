@@ -9,7 +9,7 @@ A crypto chall where we had a timed based secure exchange to defeat in a MITM po
 
 ## Figuring out what to do
 
-The challenge was marked as pwn/crypto, at first we looked at the environement which seemed very protected (nsjail and all), the usual pwn setup, despite that the main entrance point is [Python script](./chall/task.py). We are in a position of man in the middle (between Alice and Bob as Eve) and we are given a nice template [Python script](./chall/eve.py) to do so.
+The challenge was marked as pwn/crypto, at first we looked at the environement which seemed very protected (nsjail and all), the usual pwn setup, despite that the main entrance point is [task.py](./chall/task.py). We are in a position of man in the middle (between Alice and Bob as Eve) and we are given a nice template [eve.py](./chall/eve.py) to do so.
 
 At first we though the title `interlock` suggested a misuse of mutex or something, but we quickly turned our attention to the timer binary wich was used to handle a crucial part of the key/encrypted data exchange : __timing__.
 
@@ -17,7 +17,7 @@ At first we though the title `interlock` suggested a misuse of mutex or somethin
 
 I was mostly responsible for the crypto part and this key/data exchange didn't seem to but much of a problem to MITM at first, just :
 
-    Make a spoofed Alice key $A'$ a spoofed Bob key $B$ and answer Bob and Alice with their opposite spoofed keys.
+    Make a spoofed Alice key A' a spoofed Bob key B' and answer Bob and Alice with their opposite spoofed keys.
 
 But here we have a problem, when first sending $c_1$ to Bob we don't know the corresponding $x_1$ until 4 seconds later Alice gives it but the problem is that we need to wait for Bob to respond and here Alice will time out...
 
