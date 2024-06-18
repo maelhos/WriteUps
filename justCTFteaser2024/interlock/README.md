@@ -27,28 +27,7 @@ If we don't spoof the keys then we get $x_1$ and maching keys but not way to dec
 
 ## Diagram
 
-```sequence
-Note left of Alice: gen(ska, pka)
-Note left of Alice: x₁ = random(128o)
-Note left of Alice: n₁ = random(64o)
-Note left of Alice: m₁ = (x₁, n₁, pka)
-Note right of Bob: gen(skb, pkb)
-Note right of Bob: x₂ = random(128o)
-Note right of Bob: n₂ = random(64o)
-Alice->Bob: c₁ = H(m₁)
-Note left of Alice: Sleep(K)
-Note right of Bob: Sleep(K)
-Note left of Alice: s₁ = sign(m₁)
-Alice->Bob: (m₁, s₁)
-Note right of Bob: (x₁, n₁, pka) = m₁
-Note right of Bob: Assert(H(m₁) == c₁)
-Note right of Bob: Verify(m₁, s₁)
-Note right of Bob: m₂ = (m₁, x₂, n₂, pka)
-Note right of Bob: encap, ct = seal_auth(pka, skb, m2)
-Bob->Alice: (encap, ct, pkb)
-Note left of Alice: m₂ = open_auth(ska, (encap, ct, pkb))
-Note left of Alice: Assert(pka, m1 unchanged)
-```
+![Sequence diagram](diagram.png)
 
 ## Dirty C++
 
